@@ -1,8 +1,18 @@
 import org.example.Address;
+import org.example.Department;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
+    @Test
+    @DisplayName("isPostalCodeValid: ")
+    void isPostalCodeValid() {
+        String input = "";
+        boolean expResult = false;
+        boolean result = Address.isPostalCodeValid(input);
+        assertEquals(expResult, result);
+    }
+
     @Test
     @DisplayName("isPostalCodeValid: dsa")
     void isPostalCodeValiddsa() {
@@ -27,6 +37,33 @@ class MainTest {
         String input = "H00000";
         boolean expResult = false;
         boolean result = Address.isPostalCodeValid(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("isDepartmentNameValid: ")
+    void isDepartmentNameValid() {
+        String input = "";
+        boolean expResult = false;
+        boolean result = Department.isDepartmentNameValid(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("isDepartmentNameValid: DSA")
+    void isDepartmentNameValiddsa() {
+        String input = "DSA";
+        boolean expResult = true;
+        boolean result = Department.isDepartmentNameValid(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("isDepartmentNameValid: ds7j")
+    void isDepartmentNameValidds7j() {
+        String input = "ds7j";
+        boolean expResult = false;
+        boolean result = Department.isDepartmentNameValid(input);
         assertEquals(expResult, result);
     }
 }
