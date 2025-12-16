@@ -16,6 +16,11 @@ public class Address {
         AL, BC, MA, NB, NL, NS, NT, NU, ON, PE, QC, SK, YU
     }
 
+    /**
+     * checks if postal code is valid
+     * @param postalCode postal code input
+     * @return if postal code is not of length 6 or is not CDCDCD then false, else is true
+     */
     public static boolean isPostalCodeValid(String postalCode) {
         if (postalCode.length() != 6)
         {

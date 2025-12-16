@@ -10,6 +10,11 @@ public class Department {
     private String departmentName;
     private static int nextId = 1;
 
+    /**
+     * Checks if department name input is valid
+     * @param departmentName name of department
+     * @return if departmentName is empty or is not made of letters or spaces, false, else is true
+     */
     public static boolean isDepartmentNameValid(String departmentName) {
         if (departmentName == null || departmentName.isEmpty())
         {
