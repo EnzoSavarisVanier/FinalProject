@@ -1,4 +1,5 @@
 package org.example;
+import util.Util;
 import lombok.*;
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ public class Course {
     private ArrayList<Integer> finalScores;
     private static int nextId = 1;
 
+    /**
+     * determines if assignment weight is valid
+     * @return true if it is valid, false if not valid, should be 100
+     */
     public boolean isAssignmentWeightValid() {
         double totalWeight = 0;
 
@@ -25,6 +30,11 @@ public class Course {
         return totalWeight == 100;
     }
 
+    /**
+     * adds student object and score to assignment if not registered
+     * @param student student object
+     * @return false if already registered, true if not
+     */
     public boolean registerStudent(Student student) {
         if (registeredStudents.contains(student))
         {
@@ -40,6 +50,10 @@ public class Course {
         return true;
     }
 
+    /**
+     * calculates weighted average for all assignments for each student (aka final scores)
+     * @return all weighted averages
+     */
     public int[] calcStudentsAverage() {
         int[] averages = new int[registeredStudents.size()];
         for (int i = 0; i < registeredStudents.size(); i++) {
@@ -57,6 +71,13 @@ public class Course {
         return averages;
     }
 
+    /**
+     * creates an assignment if input is correct
+     * @param assignmentName name of assignment
+     * @param weight weight of assignment
+     * @param maxScore highest score achieved in the assignment
+     * @return false if input incorrect, true if correct
+     */
     public boolean addAssignment(String assignmentName, double weight, int maxScore) {
         if (assignmentName == null || weight <= 0 || weight > 100 || maxScore <= 0 || maxScore > 100)
         {
@@ -78,6 +99,9 @@ public class Course {
         return true;
     }
 
+    /**
+     * generates random scores for all assignments for each student, and calculates final scores of the students
+     */
     public void generateScores() {
         for (Assignment a : assignments) {
             a.generateRandomScore();
@@ -98,11 +122,15 @@ public class Course {
         }
     }
 
+    /**
+     * shows the student scores, averages for assignments, final scores,
+     * assignment names, course name and id, and student names
+     */
     public void displayScores() {
         int[] finalScores = calcStudentsAverage();
 
         this.courseId = String.format("C-D%s-%02d", department.getDepartmentId(), nextId++);
-        System.out.printf("Course: %s(%s)\n", courseName, courseId);
+        System.out.printf("Course: %s(%s)\n", Util.toTitleCase(courseName), courseId);
 
         System.out.printf("%-30s", "");
         for (Assignment a : assignments) {
@@ -111,7 +139,7 @@ public class Course {
         System.out.printf("%-15s", "Final Score\n");
 
         for (int i = 0; i < registeredStudents.size(); i++) {
-            System.out.printf("%-30s", registeredStudents.get(i).getStudentName());
+            System.out.printf("%-30s", Util.toTitleCase(registeredStudents.get(i).getStudentName()));
 
             for (Assignment a : assignments) {
                 System.out.printf("%-15d", a.getScores().get(i));
@@ -130,12 +158,16 @@ public class Course {
         System.out.println();
     }
 
+    /**
+     * simplifies the tostring of an assignment
+     * @return simplified tostring assignment
+     */
     public String toSimplifiedString() {
         return "Assignment{" +
                 courseId + '\'' +
-                courseName + '\'' +
+                Util.toTitleCase(courseName) + '\'' +
                 credits + '\'' +
-                department.getDepartmentName() + '\'' +
+                Util.toTitleCase(department.getDepartmentName()) + '\'' +
                 '}';
     }
 
@@ -143,9 +175,9 @@ public class Course {
     public String toString() {
         StringBuilder result = new StringBuilder("Assignment{" +
                 courseId + '\'' +
-                courseName + '\'' +
+                Util.toTitleCase(courseName) + '\'' +
                 credits + '\'' +
-                department.getDepartmentName() + '\'');
+                Util.toTitleCase(department.getDepartmentName()) + '\'');
 
         for (Assignment a : assignments) {
             result.append("  ").append(a.toString()).append('\'');

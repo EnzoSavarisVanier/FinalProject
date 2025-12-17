@@ -1,5 +1,6 @@
 package org.example;
 import lombok.*;
+import util.Util;
 
 @Getter
 @ToString
@@ -33,7 +34,7 @@ public class Department {
     public Department(String departmentName) {
         if (isDepartmentNameValid(departmentName))
         {
-            this.departmentName = departmentName;
+            this.departmentName = Util.toTitleCase(departmentName);
             this.departmentId = String.format("D%02d", nextId++);
         }
         else

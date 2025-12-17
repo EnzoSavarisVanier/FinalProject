@@ -1,5 +1,7 @@
 package org.example;
 import lombok.*;
+import util.Util;
+
 import java.util.ArrayList;
 
 @Getter
@@ -19,7 +21,7 @@ public class Student {
     }
 
     public Student(String studentName, Gender gender, Address address, Department department) {
-        this.studentName = studentName;
+        this.studentName = Util.toTitleCase(studentName);
         this.gender = gender;
         this.address = address;
         this.department = department;
@@ -27,7 +29,11 @@ public class Student {
         this.registeredCourses = new ArrayList<>();
     }
 
-
+    /**
+     * adds student and scores to a course if not already in it
+     * @param course course for student to be added in
+     * @return false if student already in course, true if not
+     */
     public boolean registerCourse(Course course) {
         if (registeredCourses.contains(course))
         {
@@ -41,6 +47,11 @@ public class Student {
         return true;
     }
 
+    /**
+     * removes student and scores to a course if already in it
+     * @param course course for student to be removed from
+     * @return true if student already in course, false if not
+     */
     public boolean dropCourse(Course course) {
         if (!registeredCourses.contains(course))
         {
@@ -52,10 +63,14 @@ public class Student {
         return true;
     }
 
+    /**
+     * simplifies student string
+     * @return simplified student string, only id, name, and department
+     */
     public String toSimplifiedString() {
         return "Student{" +
                 studentId + '\'' +
-                studentName + '\'' +
+                Util.toTitleCase(studentName) + '\'' +
                 ((department == null) ? "null" : department.getDepartmentName()) + '\'' +
                 '}';
     }
@@ -64,7 +79,7 @@ public class Student {
     public String toString() {
         StringBuilder result = new StringBuilder();
 
-        result.append("Student{").append(studentId).append('\'').append(studentName).append('\'').append(gender.toString()).append('\'').append(address.toString()).append('\'').append(department.getDepartmentName());
+        result.append("Student{").append(studentId).append('\'').append(Util.toTitleCase(studentName)).append('\'').append(gender.toString()).append('\'').append(address.toString()).append('\'').append(Util.toTitleCase(department.getDepartmentName()));
 
         for (Course c : registeredCourses) {
             result.append("  ").append(c.toSimplifiedString());

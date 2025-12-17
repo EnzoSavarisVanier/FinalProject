@@ -1,5 +1,6 @@
 import org.example.Address;
 import org.example.Department;
+import util.Util;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -64,6 +65,33 @@ class MainTest {
         String input = "ds7j";
         boolean expResult = false;
         boolean result = Department.isDepartmentNameValid(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("toTitleCase: ")
+    void toTitleCase() {
+        String input = "";
+        String expResult = "";
+        String result = Util.toTitleCase(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("toTitleCase: kFA njaJ IGjf inda")
+    void toTitleCasekFAspacenjaJspaceIGjfspaceinda() {
+        String input = "kFA njaJ IGjf inda";
+        String expResult = "Kfa Njaj Igjf Inda";
+        String result = Util.toTitleCase(input);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    @DisplayName("toTitleCase: tH")
+    void toTitleCasetH() {
+        String input = "tH";
+        String expResult = "Th";
+        String result = Util.toTitleCase(input);
         assertEquals(expResult, result);
     }
 }
