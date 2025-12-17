@@ -33,7 +33,11 @@ public class Student {
         {
             return false;
         }
+        for (Assignment a : course.getAssignments()) {
+            a.getScores().add(null);
+        }
         registeredCourses.add(course);
+        course.getRegisteredStudents().add(this);
         return true;
     }
 
@@ -42,19 +46,29 @@ public class Student {
         {
             return false;
         }
+
         registeredCourses.remove(course);
+        course.getRegisteredStudents().remove(this);
         return true;
     }
 
-    /**
-     * simplifies student string
-     * @return simplified student string, only id, name, and department
-     */
     public String toSimplifiedString() {
         return "Student{" +
                 studentId + '\'' +
                 studentName + '\'' +
                 ((department == null) ? "null" : department.getDepartmentName()) + '\'' +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("Student{").append(studentId).append('\'').append(studentName).append('\'').append(gender.toString()).append('\'').append(address.toString()).append('\'').append(department.getDepartmentName());
+
+        for (Course c : registeredCourses) {
+            result.append("  ").append(c.toSimplifiedString());
+        }
+        return result.toString();
     }
 }

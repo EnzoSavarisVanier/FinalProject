@@ -152,7 +152,7 @@ public class Course {
         }
 
         for (Student s : registeredStudents) {
-            result.append(s.getStudentId()).append('\'').append(s.getStudentName()).append('\'').append(s.getDepartment().getDepartmentName());
+            result.append("  ").append(s.toSimplifiedString()).append('\'');
         }
 
         result.append(isAssignmentWeightValid() ? " AssignmentWeightValid" : " AssignmentWeightInvalid");

@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 public class Assignment {
-    private String assignmentId = String.format("D%02d", nextId++);
+    private String assignmentId = String.format("%02d", nextId++);
     private String assignmentName;
     private double weight;
     private ArrayList<Integer> scores;
