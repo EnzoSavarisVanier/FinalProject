@@ -1,9 +1,12 @@
 package org.example;
 import java.util.ArrayList;
 import java.util.Random;
+import lombok.*;
 
+@Getter
+@Setter
 public class Assignment {
-    private String assignmentId;
+    private String assignmentId = String.format("D%02d", nextId++);
     private String assignmentName;
     private double weight;
     private ArrayList<Integer> scores;
